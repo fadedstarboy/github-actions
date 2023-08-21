@@ -25,4 +25,4 @@ jobs:
 
     - name: Run SSL Expiry Check
       run: |
-        python .github/scripts/check_ssl_expiry.py
+        python .github/check_ssl_expiry.py
