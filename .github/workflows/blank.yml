@@ -1,0 +1,29 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - main  # Or your desired branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-add ~/.ssh/id_rsa
+          ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
+
+      - name: Run SSH command
+        run: ssh user@$SERVER_IP "echo 'Hello from GitHub Actions'"
+        env:
+          SERVER_IP: ${{ secrets.SERVER_IP }}  # Replace with your server's IP
+          USER: ubuntu  # Replace with the SSH username
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
