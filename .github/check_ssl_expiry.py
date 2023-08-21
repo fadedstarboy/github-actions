@@ -34,6 +34,10 @@ else:
 # Get Slack webhook URL from repository secrets
 slack_webhook_url = os.environ.get("SLACK_WEBHOOK_URL")
 
+if not slack_webhook_url:
+    print("Slack webhook URL not found in secrets.")
+    exit(1)
+
 # Check SSL expiry for each domain and send alert to Slack
 for domain in domains:
     days_remaining = check_ssl_expiry(domain)
