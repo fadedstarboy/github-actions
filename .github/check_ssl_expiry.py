@@ -32,7 +32,7 @@ else:
     domains = []
 
 # Get Slack webhook URL from repository secrets
-slack_webhook_url = os.environ("SLACK_WEBHOOK_URL")
+slack_webhook_url = os.environ["SLACK_WEBHOOK_URL"]
 
 if not slack_webhook_url:
     print("Slack webhook URL not found in secrets.")
