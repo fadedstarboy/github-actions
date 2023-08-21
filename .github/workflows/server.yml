@@ -18,7 +18,11 @@ jobs:
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
+
+          # Start the SSH agent and add the private key
+          eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/id_rsa
+
           ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
 
       - name: Run SSH command
