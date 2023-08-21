@@ -27,3 +27,5 @@ jobs:
     - name: Run SSL Expiry Check
       run: |
         python .github/check_ssl_expiry.py
+      env:   # Set environment variable for the script
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
